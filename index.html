@@ -1,64 +1,318 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<style>
-	/* Styles pour l'en-tête à insérer */
-	header {
-		background: lightCoral
-	}
-	/* Styles pour les liens de la zone de navigation */
-	nav a {
-		text-decoration: none;
-		color: black
-	}
-	nav a:hover {
-		color: magenta
-	}
-	/* Styles pour les liens du pied de page */
-	footer a {
-		text-decoration: none;
-		color: gainsboro
-	}
-	footer a:hover {
-		color: white
-	}
-	</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-		<meta charset="UTF-8">
-		<title>Équipe HTML5 : Page d'accueil</title>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0e0e0e;
+      color: #ffffff;
+      padding-top: 80px; /* Ajouté pour ne pas cacher le contenu sous la navbar */
+    }
+
+    a {
+      color: #ff3c38;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    p {
+      text-align: justify;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;
+      background-color: #111;
+      position: fixed; /* ← Barre de navigation fixe */
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      border-bottom: 1px solid #ff3c38;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #ff3c38;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links li a {
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+
+    .section {
+      padding: 80px 10%;
+      border-bottom: 1px solid #333;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #ff3c38;
+    }
+
+    .profil {
+      width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 60, 56, 0.5);
+      border: 2px solid #ff3c38;
+      transition: transform 0.3s ease;
+    }
+
+    .profil:hover {
+      transform: scale(1.05);
+    }
+
+    .accueil-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    .accueil-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .photo-droite {
+      flex-shrink: 0;
+    }
+
+    /* Pile dispersée */
+    .pile-gauche {
+      position: relative;
+      width: 600px;
+      height: 500px;
+      margin-top: 40px;
+    }
+
+    .pile-gauche img {
+      position: absolute;
+      width: 180px;
+      height: auto;
+      border-radius: 8px;
+      border: 3px solid white;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .pile-gauche img:nth-child(1) { top: 20px; left: -60px; transform: rotate(-12deg); z-index: 1; }
+    .pile-gauche img:nth-child(2) { top: 40px; left: 100px; transform: rotate(7deg); z-index: 2; }
+    .pile-gauche img:nth-child(3) { top: 100px; left: 300px; transform: rotate(-8deg); z-index: 3; }
+    .pile-gauche img:nth-child(4) { top: 220px; left: 20px; transform: rotate(15deg); z-index: 4; }
+    .pile-gauche img:nth-child(5) { top: 300px; left: 350px; transform: rotate(-4deg); z-index: 5; }
+	.pile-gauche img:nth-child(6) { top: 250px; left: 200px; transform: rotate(-2deg); z-index: 5; }
+
+    .pile-gauche img:hover {
+      transform: scale(1.1) rotate(0deg);
+      z-index: 10;
+    }
+
+    .projet {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      gap: 20px;
+    }
+
+    .projet img {
+      width: 220px;
+      height: auto;
+      border-radius: 8px;
+      border: 2px solid #ff3c38;
+    }
+
+    ul {
+      margin-top: 10px;
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .accueil-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pile-gauche {
+        width: 320px;
+        height: 320px;
+      }
+
+      .pile-gauche img {
+        width: 130px;
+      }
+
+      .profil {
+        width: 220px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-		<header>
-				<img src="logo-HTML5.png" alt="" width="20%"/>
-		</header>
-		<nav style="background: whitesmoke; float: left">
-				<ul style="list-style: none; padding: 30px">
-					<li>
-						<a href="accueil.html">Présentation</a>
-					</li>
-					<li>
-						<a href="news.html">Actualités</a>
-					</li>
-					<li>
-						<a href="equipe.html">Equipe</a>
-					</li>
-					<li>
-						<a href="encadrement.html">Encadrement</a>
-					</li>
-					<li>
-						<a href="contact.html">Contact</a>
-					</li>
-				</ul>
-		</nav>
-		<div>Mon contenu...</div>
-		<aside style="float: right; color: magenta; font-size: 1.2em; width: 150px; border: solid">
-				Bienvenue sur le site de l'équipe HTML5 ! </aside>
-		<footer style="clear: both; padding-top: 2em; background: dimgray; color: white">
-				DUT STID, certains droits réservés
-				<div style="float: right">
-					<a href="legal.html">Mentions légales</a>
-					<a href="map.html">Plan du site</a>
-				</div>
-		</footer>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Héléna Guertin</div>
+      <ul class="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="accueil" class="section">
+    <div class="accueil-container">
+      <div class="accueil-text">
+        <h1>Bienvenue sur mon Portfolio</h1>
+        <p>Je m'appelle Héléna Guertin, j'ai 19 ans et je suis actuellement étudiant en BUT Science des données. Curieuse et motivée, je m'intéresse particulièrement à l’analyse et à l’exploitation des données. Sur ce site vous pourrez découvrir les projets qui m'ont le plus marqué et appris lors de ma première année, dans la rubrique " Mes Projets "</p>
+        <h2>Pour mieux me connaitre :</h2>
+        <p>En dehors de mes études, je suis passionné par le sport, la cuisine, les animaux, les voyages simples et la photographie, qui me permet de capturer des instants du quotidien ou de mes découvertes. Dès que j’en ai l’occasion, je m’engage également dans des actions de bénévolat, cela me permet de faire des rencontres tout en me rendant utile. Ces expériences enrichissent mon parcours personnel et professionnel, tout en renforçant mes valeurs d’entraide et d’ouverture aux autres.</p>
+
+        <div class="pile-gauche">
+          <img src="photo_tresor.jpg" alt="Tresor">
+          <img src="photo_jeux.jpg" alt="jeux">
+          <img src="photo_repas.jpg" alt="cuisine">
+          <img src="photo_giraffe.jpg" alt="Temple">
+          <img src="photo_transporteur.jpg" alt="Transporteur">
+		  <img src="yoga.jpg" alt="yoga">
+        </div>
+      </div>
+
+      <div class="photo-droite">
+        <img src="Photo_moi.png" alt="Ma photo" class="profil">
+      </div>
+    </div>
+  </section>
+
+  <section id="projets" class="section">
+    <h1>Mes Projets</h1>
+
+    <div class="projet">
+      <img src="VBA.jpg" alt="VBA">
+      <div>
+        <h2>Création d’un reporting</h2>
+        <p>Nous avons travaillé sur un outil personnel de gestion des notes pour le BUT1 SD en utilisant Excel. Cet outil nous permet d'ajouter, de modifier et de visualiser les notes par semestre, compétence, ressource ou SAÉ grâce à des listes déroulantes interactives. Toutes les données sont regroupées dans une feuille dédiée.
+
+Nous avons mis en place un tableau de bord complet avec des graphiques pour visualiser les résultats par regroupement. De plus, une décision de jury est automatiquement générée en fonction des règles de passage en deuxième année. L'outil permet également d'identifier les compétences validées.
+
+Nous avons utilisé des formules simples d'Excel pour les traitements de base, ainsi que du VBA pour les fonctionnalités plus complexes, notamment pour les UserForms. Un guide d'utilisation est également disponible pour accompagner l'application.
+</p>
+      </div>
+    </div>
+
+    <div class="projet">
+      <img src="economie.jpg" alt="Economie">
+      <div>
+        <h2>Apprendre en situation la production de données en entreprise</h2>
+        <p>Pendant ce projet, nous avons exploré les raisons du succès du NFP dans les Hautes-Alpes, en nous basant sur les données démographiques du recensement INSEE de 2021 (âge, emploi, études, chômage, etc.). Notre analyse a porté sur une sélection de vingt communes représentatives.
+Notre but était de progresser dans la collecte, l'analyse et la présentation de données : extraire des informations d'ensembles de données volumineux, créer des indicateurs significatifs, concevoir des tableaux et graphiques clairs, et rédiger une étude professionnelle et rigoureuse.
+Ce projet m'a permis d'acquérir de nouvelles compétences dans la manipulation de données démographiques complexes, l'extraction d'indicateurs pertinents et leur présentation claire à travers des graphiques et des tableaux. J'ai également amélioré mes compétences en analyse statistique et en rédaction de rapports bien structurés.
+      </div>
+    </div>
+	
+	<div class="projet">
+      <img src="enquete.jpg" alt="Enquete">
+      <div>
+        <h2>Mise en œuvre d'une enquête</h2>
+        <p> Nous avons mené une enquête statistique à l'aide du logiciel Sphinx, portant sur la pratique sportive des étudiants de l'IUT de Poitiers, site de Niort. Cette étude visait à mieux comprendre les habitudes, les freins et les motivations liés à l'activité physique chez les étudiants, dans un contexte où la sédentarité et le stress sont des problématiques croissantes.
+
+Cette enquête m'a permis de mettre en pratique les différentes étapes d'un projet statistique, de la conception du questionnaire à l'analyse des résultats. J'ai appris à formuler des hypothèses, à structurer un questionnaire, à utiliser le logiciel Sphinx pour traiter les données, et à rédiger une synthèse claire. Ce projet m'a également sensibilisée à l'importance de la rigueur, de la neutralité dans l'analyse et de la clarté dans la communication. Enfin, il m'a permis de mieux comprendre la relation entre le sport et le bien-être des étudiants.
+</p>
+      </div>
+    </div>
+	
+	 <div class="projet">
+      <img src="BDR.jpg" alt="BDR">
+      <div>
+        <h2>Conception et implémentation d'une base de données</h2>
+        <p>Dans ce projet, nous avons travaillé sur la conception et l'implémentation d'une base de données pour gérer les stocks et les ventes de sel de la coopérative des sauniers de l’île de Ré. En utilisant des fichiers CSV, nous avons modélisé les données, créé les tables en SQL, automatisé l’importation avec Python, puis développé une interface graphique avec Tkinter.
+
+Ce projet m'a permis d'acquérir une meilleure compréhension des différentes étapes impliquées dans la création d'une base de données, malgré quelques difficultés rencontrées. J'ai pu apprendre à bien structurer un modèle relationnel, à rédiger des requêtes SQL efficaces et à utiliser Python pour interagir avec la base de données. Il m'a également montré l'importance de la rigueur et de l'organisation dans un projet de développement complet.
+</p>
+      </div>
+    </div>
+	
+	 <div class="projet">
+      <img src="projet5.jpg" alt="Projet 5">
+      <div>
+        <h2>Analyse de données, reporting et datavisualisation</h2>
+        <p>Ce projet avait pour objectif de créer un outil dynamique capable d’analyser les accidents de la vie courante (AcVC) en France à partir d’un fichier Excel fourni par l’organisme Calyxis. Il s’agissait de comparer le profil des volontaires à celui de la population française, puis d’identifier les facteurs de risque liés aux accidents survenus dans les logements.
+
+En groupe, nous avons utilisé la méthode SCRUM pour organiser notre travail : sprints, mêlées quotidiennes, user stories et tableau Kanban ont structuré notre avancement. L’outil que nous avons développé permet de charger un fichier Excel, d’en nettoyer les données automatiquement, puis de générer un tableau de bord avec indicateurs et graphiques interactifs.
+
+Ce projet m’a permis de mieux comprendre la gestion de projet agile et de manipuler des données réelles pour produire des analyses utiles.J'ai aussi pris conscience de l'importance de l'automatisation car c'est un gain de temps sur le long terme qui permet d'éviter de refaire le meme nettoyage a chaque utilisation d'un fichier.
+</p>
+      </div>
+    </div>
+	
+	<div class="projet">
+      <img src="concours.jpg" alt="concours dataviz">
+      <div>
+        <h2>Dataviz (concours)</h2>
+        <p>Ce projet avait pour objectif de créer un outil dynamique capable d’analyser les accidents de la vie courante (AcVC) en France à partir d’un fichier Excel fourni par l’organisme Calyxis. Il s’agissait de comparer le profil des volontaires à celui de la population française, puis d’identifier les facteurs de risque liés aux accidents survenus dans les logements.
+
+En groupe, nous avons utilisé la méthode SCRUM pour organiser notre travail : sprints, mêlées quotidiennes, user stories et tableau Kanban ont structuré notre avancement. L’outil que nous avons développé permet de charger un fichier Excel, d’en nettoyer les données automatiquement, puis de générer un tableau de bord avec indicateurs et graphiques interactifs.
+
+Ce projet m’a permis de mieux comprendre la gestion de projet agile et de manipuler des données réelles pour produire des analyses utiles.J'ai aussi pris conscience de l'importance de l'automatisation car c'est un gain de temps sur le long terme qui permet d'éviter de refaire le meme nettoyage a chaque utilisation d'un fichier.
+</p>
+      </div>
+    </div>
+	<div class="projet">
+      <img src="portfolio.jpg" alt="concours dataviz">
+      <div>
+        <h2>Portfolio</h2>
+        <p> Vous découvrez ici un projet individuel réalisé en autonomie, dans le but de partager avec vous les types de travaux que nous menons tout au long de notre parcours universitaire. Ce projet m’a permis de prendre du recul sur les compétences que j’ai acquises, de me remettre en question sur mes apprentissages, et de mieux cerner mes centres d’intérêt. C’est également l’occasion pour moi d’apprendre de manière autonome, j’ai notamment pu découvrir et approfondir mes connaissances en HTML et CSS.
+</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h1>Contact</h1>
+    <p>Vous pouvez me contacter par :</p>
+    <ul>
+      <li>Email : helenaguertin@gmail.com</li>
+	   <li>Numéro de téléphone : 07.66.25.66.96</li>
+      <li>LinkedIn : <a href="https://www.linkedin.com/in/helena-guertin-7a5a45344" target="_blank">Mon profil</a></li>
+    </ul>
+  </section>
 </body>
 </html>
